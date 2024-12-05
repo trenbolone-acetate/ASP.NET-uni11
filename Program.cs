@@ -1,7 +1,13 @@
+using ASPNET11.Filters;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddMvc(options => {
+    options.Filters.Add(new LogActionFilter());
+    options.Filters.Add(new UniqueUserCounterFilter());
+});
 
 var app = builder.Build();
 
